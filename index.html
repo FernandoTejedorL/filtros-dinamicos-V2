@@ -3,10 +3,35 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Red+Hat+Text:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="./css/styles.css" />
     <title>Document</title>
   </head>
   <body>
+    <header id="filters-content" class="filters-content">
+      <div>
+        <label for="text-input">Name</label>
+        <input id="text-input" type="text" />
+      </div>
+      <div>
+        <label for="checkbox">Sugarless</label>
+        <input id="checkbox" type="checkbox" />
+      </div>
+      <select name="order" id="order">
+        <option value="default">Default</option>
+        <option value="name">Name</option>
+        <option value="price">Price</option>
+      </select>
+    </header>
+    <main class="main">
+      <div id="products" class="products"></div>
+    </main>
+    <h2 id="no-products" class="hidden no-show">No product matches</h2>
     <script src="./js/scripts.js"></script>
   </body>
 </html>
