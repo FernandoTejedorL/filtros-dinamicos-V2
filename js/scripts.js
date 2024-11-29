@@ -62,68 +62,66 @@ const products = [
   },
 ];
 
-const printItems = (product) => {
-  const fragment = document.createDocumentFragment();
+const printItems = (array) => {
+  array.forEach((product) => {
+    const fragment = document.createDocumentFragment();
 
-  const eachProduct = document.createElement('div');
-  eachProduct.classList.add('each-product');
+    const eachProduct = document.createElement('div');
+    eachProduct.classList.add('each-product');
 
-  const image = document.createElement('img');
-  image.classList.add('image');
-  image.src = product.image;
+    const image = document.createElement('img');
+    image.classList.add('image');
+    image.src = product.image;
 
-  const name = document.createElement('span');
-  name.classList.add('name');
-  name.textContent = product.name;
+    const name = document.createElement('span');
+    name.classList.add('name');
+    name.textContent = product.name;
 
-  const sugarless = document.createElement('span');
-  sugarless.classList.add('sugarless');
-  sugarless.textContent = product.sugarless;
+    const sugarless = document.createElement('span');
+    sugarless.classList.add('sugarless');
+    sugarless.textContent = product.sugarless;
 
-  const price = document.createElement('span');
-  price.classList.add('price');
-  price.textContent = '$' + product.price.toFixed(2);
+    const price = document.createElement('span');
+    price.classList.add('price');
+    price.textContent = '$' + product.price.toFixed(2);
 
-  eachProduct.append(image, name, sugarless, price);
-  fragment.append(eachProduct);
-  productsElement.append(fragment);
+    eachProduct.append(image, name, sugarless, price);
+    fragment.append(eachProduct);
+    productsElement.append(fragment);
+  });
 };
 
 const orderByName = () => {
   const newProducts = [...products];
-  productsElement.innerHTML = '';
+  productsElement.textContent = '';
   newProducts.sort((productA, productB) =>
     productA.name.localeCompare(productB.name)
   );
   console.log(newProducts);
-  newProducts.forEach((product) => printItems(product));
+  printItems(newProducts);
 };
-orderByName(products);
 
 const orderByPrice = () => {
   const newProducts = [...products];
-  productsElement.innerHTML = '';
+  productsElement.textContent = '';
   newProducts.sort((productA, productB) => productA.price - productB.price);
   console.log(newProducts);
-  newProducts.forEach((product) => printItems(product));
+  printItems(newProducts);
 };
-orderByPrice(products);
 
 const sugarlessProducts = () => {
   const newProducts = [...products];
-  productsElement.innerHTML = '';
+  productsElement.textContent = '';
   const filteredProducts = newProducts.filter(
     (product) => product.sugarless === 'Sugarless'
   );
   console.log(filteredProducts);
-  filteredProducts.forEach((product) => printItems(product));
+  printItems(filteredProducts);
 };
-sugarlessProducts(products);
 
 const showAll = () => {
-  const newProducts = [...products];
-  productsElement.innerHTML = '';
-  products.forEach((product) => printItems(product));
+  productsElement.textContent = '';
+  printItems(products);
 };
 
 showAll();
@@ -149,18 +147,18 @@ const showByFilters = (event) => {
 
 const fliterByName = (event) => {
   const productsToFilter = [...products];
-  productsElement.innerHTML = '';
+  productsElement.textContent = '';
   let input = event.target.value.toLowerCase();
   const filtered = productsToFilter.filter((product) =>
     product.name.toLowerCase().includes(input)
   );
-  filtered.forEach((product) => printItems(product));
+  console.log(filtered);
+  printItems(filtered);
   if (filtered.length === 0) {
     noProducts.classList.remove('no-show');
   } else {
     noProducts.classList.add('no-show');
   }
-  Object.assign(productsToFilter, [...products]);
 };
 selectElement.addEventListener('change', showByFilters);
 
